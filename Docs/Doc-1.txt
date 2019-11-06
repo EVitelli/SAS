@@ -1,6 +1,6 @@
 Locais
 	Nome
-	Características
+	Descrição
 	Qtde pessoas
 	Equipamentos
 	

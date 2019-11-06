@@ -1,0 +1,52 @@
+CREATE DATABASE SAS;
+
+USE SAS;
+
+CREATE TABLE Ambientes(
+	AmbienteId INT PRIMARY KEY IDENTITY NOT NULL,
+	Nome VARCHAR(255) NOT NULL,
+	SoftwaresDoAmbiente TEXT NOT NULL,
+	EquipamentosDoAmbiente VARCHAR(255),
+	QuantidadePessoas INT NOT NULL
+);
+
+CREATE TABLE Categorias(
+	CategoriaId INT PRIMARY KEY IDENTITY NOT NULL,
+	Nome VARCHAR(100) UNIQUE
+);
+
+CREATE TABLE Permissoes(
+	PermissaoId INT PRIMARY KEY IDENTITY NOT NULL,
+	Nome VARCHAR(100) UNIQUE
+);
+
+CREATE TABLE Usuarios(
+	UsuarioId INT PRIMARY KEY NOT NULL IDENTITY,
+	Nome VARCHAR(255) NOT NULL,
+	NIF VARCHAR(50) NOT NULL UNIQUE,
+	Senha VARCHAR(255),
+	PermissaoId INT FOREIGN KEY REFERENCES Permissoes(PermissaoId)
+);
+
+CREATE TABLE Participantes(
+	ParticipanteId INT PRIMARY KEY IDENTITY NOT NULL,
+	Nome VARCHAR(255) NOT NULL,
+	RG CHAR(10) UNIQUE,
+	NumeroCracha VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Agendamentos(
+	AgendamentoId INT PRIMARY KEY IDENTITY NOT NULL,
+	InicioReserva DATETIME NOT NULL,
+	TerminoReserva DATETIME NOT NULL,
+	Descricao VARCHAR(255) NOT NULL,
+	Observacao VARCHAR(255) DEFAULT('N/C'),
+	CategoriaId INT FOREIGN KEY REFERENCES Categorias(CategoriaId),
+	Criador INT FOREIGN KEY REFERENCES Usuarios(UsuarioId),
+	AmbienteId INT FOREIGN KEY REFERENCES Ambientes(AmbienteId)
+);
+
+CREATE TABLE AgendamentosParticipantes(
+	AgendamentoId INT FOREIGN KEY REFERENCES Agendamentos(AgendamentoId),
+	ParticipanteId INT FOREIGN KEY REFERENCES Participantes(ParticipanteId)
+);

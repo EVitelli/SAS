@@ -1,0 +1,65 @@
+Ambientes
+	Nome
+	Descrição
+	Qtde pessoas
+	Equipamentos do Ambiente
+	
+Agendamentos
+	Horário inicio
+	Horário término
+	Softwares
+	Observação			
+	Criador (user)
+	Ambiente
+	Categoria do evento
+
+Categorias
+	Nome
+
+Usuários
+	Nome
+	NIF
+	Senha
+	Permissão
+	
+Permissões
+	Nome
+	
+Participantes
+	Nome
+	Rg
+	Crachá
+
+------------------------------------------------------------------------------------
+
+Agendamentos
+	Início 				-	 	07/11/2019 - 13:30
+	Fim 				- 		07/11/2019 - 15:30
+	Criador 			-		Oliver (usuário)
+	Nome 				-		Palestra de Kotlin
+	Categoria			-		Palestra
+	Ambiente			- 		Sala 12 - Aquário
+		
+Ambiente
+	Nome				-		Sala 12 - Aquário
+	Softwares			-		SQL Server, Android Studio, Visual Studio
+	Qtde pessoas			-		24
+	EquipamentosDoAmbiente		-		Notebook, Projetor, Lousa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
