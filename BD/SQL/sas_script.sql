@@ -14,6 +14,8 @@ CREATE TABLE Ambientes (
 	QtdEquipamentos			INT NOT NULL DEFAULT(0),
 	QtdMaxPessoas			INT NOT NULL DEFAULT(0),
 	Observacao				TEXT NULL DEFAULT('N/C'),
+	-- ativo, inativo, em reforma
+	StatusAmbiente			VARCHAR(200) NULL DEFAULT('Ativo')
 )
 GO
 
