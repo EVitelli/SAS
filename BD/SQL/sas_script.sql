@@ -6,6 +6,8 @@ GO
 USE SAS
 GO
 
+-- TODO : colocar unique para o nome da sala
+
 CREATE TABLE Ambientes (
 	AmbienteId				INT PRIMARY KEY IDENTITY NOT NULL,
 	Nome					VARCHAR(255) NOT NULL,
@@ -18,6 +20,8 @@ CREATE TABLE Ambientes (
 	StatusAmbiente			VARCHAR(200) NULL DEFAULT('Ativo')
 )
 GO
+
+INSERT INTO Ambientes VALUES ('Sala 12', 'Visual Studio 2017, SQL Server', 'Top', 25, 25, 'Aquário', 1);
 
 SELECT AmbienteId, Nome, DescricaoSoftwares, DescricaoEquipamentos, QtdEquipamentos, QtdMaxPessoas, Observacao FROM Ambientes
 
@@ -40,15 +44,20 @@ GO
 INSERT INTO Permissoes VALUES ('Gestão'), ('Coordenação'), ('Recepção'), ('Administração')
 GO
 
+SELECT * FROM Permissoes
+
 CREATE TABLE Usuarios (
 	UsuarioId		INT PRIMARY KEY NOT NULL IDENTITY,
 	Nome			VARCHAR(255) NOT NULL,
 	NIF				VARCHAR(50) NOT NULL UNIQUE,
 	Email			VARCHAR(255) UNIQUE NOT NULL,
 	Senha			VARCHAR(255),
+	StatusUsuario	BIT DEFAULT(1) NOT NULL,
 	PermissaoId		INT FOREIGN KEY REFERENCES Permissoes(PermissaoId)
 )
 GO
+
+INSERT INTO Usuarios VALUES ('Administrador', '123456', 'admin@admin.com', '123456', 1, 4);
 
 SELECT U.*, P.*
 FROM Usuarios U

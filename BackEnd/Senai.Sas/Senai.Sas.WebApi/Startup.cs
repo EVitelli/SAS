@@ -1,17 +1,44 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Senai.Sas.Infra.Core.Persistence.Interfaces;
+using Senai.Sas.Infra.Core.Persistence.Repositories;
+using Senai.Sas.Infra.Core.Services;
+using Senai.Sas.Infra.Core.Services.Interfaces;
+using Senai.Sas.Infra.Data.Domains;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 
 namespace Senai.Sas.WebApi
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<SasContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // mvc
+            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2)
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
             // Configurando o serviço de documentação do Swagger
             services.AddSwaggerGen(c =>
             {
@@ -29,6 +56,55 @@ namespace Senai.Sas.WebApi
                     });
 
             });
+
+            // repositorios
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IAmbienteRepository, AmbienteRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+
+            // services
+            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IAmbienteService, AmbienteService>();
+            services.AddScoped<ICategoriaService, CategoriaService>();
+
+            //Adiciona o Cors ao projeto
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
+
+            //Implementa autenticação
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "JwtBearer";
+                options.DefaultChallengeScheme = "JwtBearer";
+            }
+            ).AddJwtBearer("JwtBearer", options =>
+            {
+                //Define as opções 
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    //Quem esta solicitando
+                    ValidateIssuer = true,
+                    //Quem esta validadando
+                    ValidateAudience = true,
+                    //Definindo o tempo de expiração
+                    ValidateLifetime = true,
+                    //Forma de criptografia
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("sas-chave-autenticacao")),
+                    //Tempo de expiração do Token
+                    ClockSkew = TimeSpan.FromDays(365),
+                    //Nome da Issuer, de onde esta vindo
+                    ValidIssuer = "Sas.WebApi",
+                    //Nome da Audience, de onde esta vindo
+                    ValidAudience = "Sas.WebApi"
+                };
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +115,9 @@ namespace Senai.Sas.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            //Habilita a autenticação
+            app.UseAuthentication();
+
             // documentacao
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -46,6 +125,11 @@ namespace Senai.Sas.WebApi
                 c.SwaggerEndpoint("/swagger/v1/swagger.json",
                     "SAS App");
             });
+
+            //Habilita o Cors
+            app.UseCors("CorsPolicy");
+
+            app.UseMvc();
         }
     }
 }

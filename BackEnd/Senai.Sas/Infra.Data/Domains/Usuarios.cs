@@ -16,6 +16,7 @@ namespace Senai.Sas.Infra.Data.Domains
         public string Email { get; set; }
         public string Senha { get; set; }
         public int? PermissaoId { get; set; }
+        public bool StatusUsuario { get; set; }
 
         public virtual Permissoes Permissao { get; set; }
         public virtual ICollection<Agendamentos> Agendamentos { get; set; }
