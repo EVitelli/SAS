@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Senai.Sas.Infra.Core.Services.Interfaces;
@@ -23,7 +21,6 @@ namespace Senai.Sas.WebApi.Controllers
             _ambienteService = ambienteService;
         }
 
-        // TODO: colocar comentários no código
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ambientes>>> GetAmbientes()

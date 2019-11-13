@@ -87,6 +87,12 @@ CREATE TABLE Agendamentos (
 )
 GO
 
+INSERT INTO Agendamentos VALUES (GETDATE(), GETDATE(), 'Agenda Descricao', 'Agenda Observacao', 'Agendado', 1, 1, 1)
+GO
+
+SELECT * FROM Agendamentos
+GO
+
 CREATE TABLE AgendamentosParticipantes (
 	AgendaParticipanteId	INT PRIMARY KEY IDENTITY NOT NULL,
 	AgendamentoId			INT FOREIGN KEY REFERENCES Agendamentos(AgendamentoId),

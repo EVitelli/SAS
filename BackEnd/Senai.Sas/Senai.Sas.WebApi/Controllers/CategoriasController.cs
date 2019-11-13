@@ -21,7 +21,6 @@ namespace Senai.Sas.WebApi.Controllers
             _categoriaService = categoriaService;
         }
 
-        // TODO: colocar comentários no código
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Categorias>>> GetAmbientes()

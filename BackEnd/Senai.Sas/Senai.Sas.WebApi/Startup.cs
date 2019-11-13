@@ -61,11 +61,13 @@ namespace Senai.Sas.WebApi
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IAmbienteRepository, AmbienteRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
 
-            // services
+            // servicos
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IAmbienteService, AmbienteService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<IAgendamentoService, AgendamentoService>();
 
             //Adiciona o Cors ao projeto
             services.AddCors(options =>
