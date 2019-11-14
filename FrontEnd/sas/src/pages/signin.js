@@ -14,6 +14,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 import Container from "@material-ui/core/Container";
+import Divider from "@material-ui/core/Divider";
 
 import api from "../services/api";
 
@@ -63,13 +64,16 @@ class SignIn extends Component {
         if (response.status === 200) {
           console.log(response.data.token);
           localStorage.setItem("@sas-token", response.data.token);
-          this.props.history.push("/home");
+          this.props.history.push("/dashboard");
         } else {
           this.setState({ error: "Verifique suas credenciais." });
         }
       })
       .catch(erro => {
-        this.setState({ error: "Usuário ou senha inválidos" });
+        console.log(erro);
+        this.setState({
+          error: "Um erro ocorreu. Verifique suas credenciais."
+        });
       });
   };
 
@@ -77,61 +81,71 @@ class SignIn extends Component {
     const { classes } = this.props;
     return (
       <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          SAS
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="nif"
-            label="NIF"
-            name="nif"
-            autoComplete="nif"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="senha"
-            label="Senha"
-            type="senha"
-            id="senha"
-            autoComplete="current-password"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            SAS
+          </Typography>
+          <form
+            method="POST"
+            className={classes.form}
+            noValidate
+            onSubmit={this.efetuarLogin}
           >
-            login
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+            {this.state.error && <p>{this.state.error}</p>}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              type="nif"
+              id="nif"
+              label="NIF"
+              name="nif"
+              autoComplete="nif"
+              autoFocus
+              onChange={e => this.setState({ nif: e.target.value })}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="senha"
+              label="Senha"
+              type="senha"
+              id="senha"
+              onChange={e => this.setState({ senha: e.target.value })}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              login
+            </Button>
+            <Divider style={{ margin: "10px 0 10px 0" }} />
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+            >
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Recuperar Senha
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+          </form>
+        </div>
+      </Container>
       // <form onSubmit={this.efetuarLogin}>
       //   {this.state.error && <p>{this.state.error}</p>}
       //   <input
@@ -150,4 +164,4 @@ class SignIn extends Component {
   }
 }
 
-export default withStyles(styles)(withRouter(SignIn));
+export default withRouter(withStyles(styles)(SignIn));
