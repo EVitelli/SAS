@@ -1,0 +1,458 @@
+{
+	"info": {
+		"_postman_id": "4f00d26c-e71b-43e8-a2aa-39fed702bf12",
+		"name": "Senai.Sas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "Usuarios.Autenticar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nif\" : \"123456\",\n\t\"senha\" : \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{sas}}/login",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ambientes",
+			"item": [
+				{
+					"name": "Ambientes.Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sas}}/ambientes",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"ambientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ambientes.BuscarPorId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sas}}/ambientes/1",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"ambientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ambientes.Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Laboratório 12\",\r\n    \"descricaoSoftwares\": \"Visual Studio 2017, SQL Server\",\r\n    \"descricaoEquipamentos\": \"Laboratório do Segundo Termo\",\r\n    \"qtdEquipamentos\": 25,\r\n    \"qtdMaxPessoas\": 20,\r\n    \"observacao\": \"Aquário\",\r\n    \"statusAmbiente\": \"1\",\r\n    \"agendamentos\": []\r\n}"
+						},
+						"url": {
+							"raw": "{{sas}}/ambientes/1",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"ambientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ambientes.Cadastrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Sala 2\",\r\n    \"descricaoSoftwares\": \"VirtualBox\",\r\n    \"descricaoEquipamentos\": \"Laboratório do Segundo Termo de Redes\",\r\n    \"qtdEquipamentos\": 24,\r\n    \"qtdMaxPessoas\": 25,\r\n    \"observacao\": \"Redes\",\r\n    \"statusAmbiente\": \"1\"\r\n}"
+						},
+						"url": {
+							"raw": "{{sas}}/ambientes",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"ambientes"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Categorias",
+			"item": [
+				{
+					"name": "Categorias.Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sas}}/categorias",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categorias.BuscarPorId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sas}}/categorias/1",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"categorias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categorias.Cadastrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Hackaton\"\r\n}"
+						},
+						"url": {
+							"raw": "{{sas}}/categorias",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categorias.Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Curso Presencial\"\r\n}"
+						},
+						"url": {
+							"raw": "{{sas}}/categorias/2",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"categorias",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Agendamentos",
+			"item": [
+				{
+					"name": "Agendamentos.Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sas}}/Agendamentos",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"Agendamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agendamentos.BuscarPorId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sas}}/Agendamentos/1",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"Agendamentos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agendamentos.Cadastrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"inicioReserva\": \"2019-11-13T11:25:16.76\",\r\n    \"terminoReserva\": \"2019-11-13T11:25:16.76\",\r\n    \"descricao\": \"Agenda Descricao\",\r\n    \"observacao\": \"Agenda Observacao\",\r\n    \"statusAgenda\": \"Agendado\",\r\n    \"categoriaId\": 1,\r\n    \"criador\": 1,\r\n    \"ambienteId\": 2\r\n}"
+						},
+						"url": {
+							"raw": "{{sas}}/Agendamentos",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"Agendamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agendamentos.Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImp0aSI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhw6fDo28iLCJleHAiOjE1NzYxNzExODUsImlzcyI6IlNhcy5XZWJBcGkiLCJhdWQiOiJTYXMuV2ViQXBpIn0.TO3YsD1TklUG1jF7mRkfU8lYVpSBHuG29Wi3hfNaj7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"inicioReserva\": \"2019-11-13T11:25:16.76\",\r\n    \"terminoReserva\": \"2019-11-13T11:25:16.76\",\r\n    \"descricao\": \"Agenda Descrição\",\r\n    \"observacao\": \"Agenda Observação\",\r\n    \"statusAgenda\": \"Agendado\",\r\n    \"categoriaId\": 1,\r\n    \"criador\": 1,\r\n    \"ambienteId\": 1\r\n}"
+						},
+						"url": {
+							"raw": "{{sas}}/Agendamentos/1",
+							"host": [
+								"{{sas}}"
+							],
+							"path": [
+								"Agendamentos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

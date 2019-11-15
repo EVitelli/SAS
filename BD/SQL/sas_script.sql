@@ -21,7 +21,7 @@ CREATE TABLE Ambientes (
 )
 GO
 
-INSERT INTO Ambientes VALUES ('Sala 12', 'Visual Studio 2017, SQL Server', 'Top', 25, 25, 'Aqu·rio', 1);
+INSERT INTO Ambientes VALUES ('Sala 12', 'Visual Studio 2017, SQL Server', 'Top', 25, 25, 'Aqu√°rio', 1);
 
 SELECT AmbienteId, Nome, DescricaoSoftwares, DescricaoEquipamentos, QtdEquipamentos, QtdMaxPessoas, Observacao FROM Ambientes
 
@@ -41,7 +41,7 @@ CREATE TABLE Permissoes (
 )
 GO
 
-INSERT INTO Permissoes VALUES ('Gest„o'), ('CoordenaÁ„o'), ('RecepÁ„o'), ('AdministraÁ„o')
+INSERT INTO Permissoes VALUES ('Gest√£o'), ('Coordena√ß√£o'), ('Recep√ß√£o'), ('Administra√ß√£o')
 GO
 
 SELECT * FROM Permissoes
