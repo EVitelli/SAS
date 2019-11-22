@@ -15,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/styles";
 import Container from "@material-ui/core/Container";
 import Divider from "@material-ui/core/Divider";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import api from "../services/api";
 
@@ -49,7 +50,8 @@ class SignIn extends Component {
     this.state = {
       nif: "",
       senha: "",
-      error: ""
+      error: "",
+      loading: false
     };
   }
 
@@ -58,11 +60,13 @@ class SignIn extends Component {
 
     const { nif, senha } = this.state;
 
+    this.setState({ loading: true });
+
     await api
       .post("/login", { nif, senha })
       .then(response => {
+        this.setState({ loading: false });
         if (response.status === 200) {
-          console.log(response.data.token);
           localStorage.setItem("@sas-token", response.data.token);
           this.props.history.push("/dashboard");
         } else {
@@ -70,7 +74,7 @@ class SignIn extends Component {
         }
       })
       .catch(erro => {
-        console.log(erro);
+        this.setState({ loading: false });
         this.setState({
           error: "Um erro ocorreu. Verifique suas credenciais."
         });
@@ -95,7 +99,6 @@ class SignIn extends Component {
             noValidate
             onSubmit={this.efetuarLogin}
           >
-            {this.state.error && <p>{this.state.error}</p>}
             <TextField
               variant="outlined"
               margin="normal"
@@ -120,6 +123,10 @@ class SignIn extends Component {
               id="senha"
               onChange={e => this.setState({ senha: e.target.value })}
             />
+            <Grid justify="center" alignItems="center" alignContent="center" item xs={12} container="true">
+              {this.state.error && <p>{this.state.error}</p>}
+              {this.state.loading === true ? <CircularProgress /> : null}
+            </Grid>
             <Button
               type="submit"
               fullWidth
@@ -146,20 +153,6 @@ class SignIn extends Component {
           </form>
         </div>
       </Container>
-      // <form onSubmit={this.efetuarLogin}>
-      //   {this.state.error && <p>{this.state.error}</p>}
-      //   <input
-      //     type="nif"
-      //     placeholder="NIF"
-      //     onChange={e => this.setState({ nif: e.target.value })}
-      //   />
-      //   <input
-      //     type="senha"
-      //     placeholder="Senha"
-      //     onChange={e => this.setState({ senha: e.target.value })}
-      //   />
-      //   <button type="submit">Entrar</button>
-      // </form>
     );
   }
 }
